@@ -28,6 +28,12 @@ var processRecord = function (record) {
     // Create an object the model can parse (allows for human usable CSVs)
     var modelObject = Model.parseCsvRecord(record)
 
+    // Check if Model is creating its own _id else create one
+    if (!modelObject._id){
+        var id = mongoose.Types.ObjectId();
+        modelObject._id = id;
+    }
+    
     // Query to check if document already exists
     var query = { _id: modelObject._id };
 
